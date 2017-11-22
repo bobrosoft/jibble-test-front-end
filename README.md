@@ -11,6 +11,8 @@ but that could be done
 - Node 6+
 
 ## Installation
+- `git clone https://github.com/bobrosoft/jibble-test-front-end.git`
+- `cd jibble-test-front-end`
 - `yarn` or `npm install`
 
 ## Run the app
