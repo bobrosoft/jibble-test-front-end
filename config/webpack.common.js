@@ -260,7 +260,8 @@ module.exports = function (options) {
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
       new CopyWebpackPlugin([
-        {from: 'src/assets', to: 'assets'}
+        {from: 'src/assets', to: 'assets'},
+        {from: 'src/assets/service-worker.js', to: 'service-worker.js'}
       ]),
 
 
