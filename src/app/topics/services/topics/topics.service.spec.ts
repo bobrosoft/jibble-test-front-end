@@ -4,7 +4,9 @@ import {TopicsService} from './topics.service';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/switchMap';
 import {Topic} from '../../models/topic.model';
+
 
 describe('TopicsService', () => {
   let injector: TestBed;
@@ -130,57 +132,71 @@ describe('TopicsService', () => {
     mockResponses();
   });
 
-  it('should load and return proper topics$ data', () => {
-    service.loadTopics().subscribe(() => {
-      service.topics$.subscribe((data) => {
+  it('should load and return proper topics$ data', (done) => {
+    service.loadTopics()
+      .switchMap(() => {
+        return service.topics$.take(1);
+      })
+      .subscribe((data) => {
         expect(data.length).toBe(2);
         expect(data[0].post).toBeDefined();
         expect(data[0].user).toBeDefined();
         expect(data[0].album).toBeDefined();
+
+        done();
       });
-    });
 
     mockResponses();
   });
 
-  it('should update title for topic with updatePostTitleForTopic', () => {
-    service.loadTopics().subscribe(() => {
-      let oldTitle: string;
-      let newTitle: string;
-      
-      service.topics$.take(1).subscribe((data) => {
+  it('should update title for topic with updatePostTitleForTopic', (done) => {
+    let oldTitle: string;
+    let newTitle: string;
+
+    service.loadTopics()
+      .switchMap(() => {
+        return service.topics$.take(1);
+      })
+      .switchMap((data) => {
         oldTitle = data[0].post.title;
         newTitle = oldTitle + Math.random();
-        
+
         service.updatePostTitleForTopic(newTitle, data[0]);
 
-        service.topics$.take(1).subscribe((data) => {
-          expect(data[0].post.title).toBe(newTitle);
-          expect(data[0].post.title).not.toBe(oldTitle);
-        });
+        return service.topics$.take(1);
+      })
+      .subscribe((data) => {
+        expect(data[0].post.title).toBe(newTitle);
+        expect(data[0].post.title).not.toBe(oldTitle);
+        
+        done();
       });
-    });
 
     mockResponses();
   });
 
-  it('should delete topic with deleteTopic', () => {
-    service.loadTopics().subscribe(() => {
-      let topicToDelete: Topic;
-      let oldLength: number;
-
-      service.topics$.take(1).subscribe((data) => {
+  it('should delete topic with deleteTopic', (done) => {
+    let topicToDelete: Topic;
+    let oldLength: number;
+    
+    service.loadTopics()
+      .switchMap(() => {
+        return service.topics$.take(1);
+      })
+      .switchMap((data) => {
         topicToDelete = data[0];
         oldLength = data.length;
 
         service.deleteTopic(topicToDelete);
 
-        service.topics$.take(1).subscribe((data) => {
-          expect(data.length).toBe(oldLength - 1);
-          expect(data.find(t => t.post.id === topicToDelete.post.id)).toBeUndefined();
-        });
+        return service.topics$.take(1);
+      })
+      .subscribe((data) => {
+        expect(data.length).toBe(oldLength - 1);
+        expect(data.find(t => t.post.id === topicToDelete.post.id)).toBeUndefined();
+
+        done();
       });
-    });
 
     mockResponses();
   });
