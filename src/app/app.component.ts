@@ -4,7 +4,6 @@
 import {
   Component,
   OnInit,
-  ViewEncapsulation
 } from '@angular/core';
 
 /*
@@ -13,7 +12,6 @@ import {
  */
 @Component({
   selector: 'app',
-  encapsulation: ViewEncapsulation.None,
   styleUrls: ['app.component.scss'],
   template: `
     <main>

@@ -4,6 +4,7 @@ import { TopicsPageComponent } from './topics-page.component';
 import {TopicsService} from '../../services/topics/topics.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import {Component, Input} from '@angular/core';
 
 describe('TopicsPageComponent', () => {
   let component: TopicsPageComponent;
@@ -14,7 +15,10 @@ describe('TopicsPageComponent', () => {
       providers: [
         {provide: TopicsService, useClass: MockTopicsService}
       ],
-      declarations: [ TopicsPageComponent ]
+      declarations: [
+        MockTopicsListComponent,
+        TopicsPageComponent
+      ]
     })
     .compileComponents();
   }));
@@ -36,4 +40,12 @@ class MockTopicsService {
   loadTopics() {
     return Observable.of([]);
   }
+}
+
+@Component({
+  selector: 'topics-list',
+  template: ''
+})
+class MockTopicsListComponent {
+  @Input() topics: any;
 }

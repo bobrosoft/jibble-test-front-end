@@ -9,7 +9,7 @@ import {Topic} from '../../models/topic.model';
   styleUrls: ['./topics-page.component.scss']
 })
 export class TopicsPageComponent implements OnInit {
-  topics: Observable<Topic[]> = this.topicsService.topics$;
+  topics$: Observable<Topic[]> = this.topicsService.topics$;
   
   constructor(
     protected topicsService: TopicsService

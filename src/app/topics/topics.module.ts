@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {TopicsService} from './services/topics/topics.service';
 import {TopicsPageComponent} from './components/topics-page/topics-page.component';
 import {TopicsListComponent} from './components/topics-list/topics-list.component';
+import {TopicsListItemComponent} from './components/topics-list-item/topics-list-item.component';
 
 @NgModule({
   imports: [
@@ -10,6 +11,7 @@ import {TopicsListComponent} from './components/topics-list/topics-list.componen
   ],
   declarations: [
     TopicsListComponent,
+    TopicsListItemComponent,
     TopicsPageComponent
   ],
   providers: [

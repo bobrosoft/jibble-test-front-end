@@ -1,0 +1,52 @@
+:host {
+  display: flex;
+  height: 80px;
+  align-items: center;
+}
+
+.titles-container {
+  flex: 1;
+  overflow: hidden; // need for ellipsis
+  
+  .post-title {
+    font-size: 1.2rem;
+  }
+
+  .album-title {
+    width: 100%;
+    margin-top: 5px;
+    color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.user-container {
+  margin-left: 10px;
+  width: 140px;
+
+  .user-name {
+    display: flex;
+    
+    .fa {
+      margin-right: 10px;
+    }
+  }
+}
+
+.actions-container {
+  margin-left: 10px;
+  
+  .fa {
+    margin: 0 5px;
+    opacity: 0.6;
+    font-size: 1.8rem;
+    transition: 0.3s opacity;
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

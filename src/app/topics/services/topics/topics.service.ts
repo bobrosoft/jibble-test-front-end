@@ -39,14 +39,14 @@ export class TopicsService {
       
         // Let's create topic objects we actually need
         for (let i = 0; i < this.topicsLimit; i++) {
-          // Exist if no more data exists
-          if (typeof posts[i] === 'undefined' || typeof users[i]  === 'undefined' || typeof albums[i] === 'undefined') {
+          // Exist if no more data exists (we need posts to be unique here)
+          if (typeof posts[i] === 'undefined' || typeof albums[i] === 'undefined') {
             break;
           }
           
           result.push({
             post: posts[i],
-            user: users[i],
+            user: users[i % users.length], // API has less than 10 users as I see %)
             album: albums[i],
           });
         }
