@@ -1,1 +1,3 @@
-<topics-list-item *ngFor="let topic of topics" [topic]="topic"></topics-list-item>
+<topics-list-item *ngFor="let topic of topics" [topic]="topic" 
+  (postTitleChange)="onPostTitleChange($event, topic)" (deleteClick)="onDeleteItemClick(topic)"
+></topics-list-item>

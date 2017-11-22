@@ -1,11 +1,18 @@
 <div class="titles-container">
-  <div class="post-title">{{topic.post?.title}}</div>
+  <div class="post-title" [ngSwitch]="isEditing">
+    <ng-container *ngSwitchCase="false">
+      {{topic.post?.title}}
+    </ng-container>
+    <ng-container [formGroup]="details" *ngSwitchCase="true">
+      <input class="spec-input" type="text" formControlName="postTitle" (keydown.enter)="onPressEnter()" (keydown.esc)="onPressEsc()"/>
+    </ng-container>
+  </div>
   <div class="album-title">Album: {{topic.album?.title}}</div>
 </div>
 <div class="user-container">
   <div class="user-name"><i class="fa fa-user-o"></i> {{topic.user?.name}}</div>
 </div>
 <div class="actions-container">
-  <i class="fa fa-pencil"></i>
-  <i class="fa fa-trash"></i>
+  <i class="fa fa-pencil spec-edit-btn" (click)="onEditClick()"></i>
+  <i class="fa fa-trash spec-delete-btn" (click)="onDeleteClick()"></i>
 </div>

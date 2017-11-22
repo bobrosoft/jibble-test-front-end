@@ -20,4 +20,11 @@ export class TopicsPageComponent implements OnInit {
     this.topicsService.loadTopics().subscribe();
   }
 
+  onPostTitleChange(event: {title: string, topic: Topic}) {
+    this.topicsService.updatePostTitleForTopic(event.title, event.topic);
+  }
+
+  onDeleteItem(topic: Topic) {
+    this.topicsService.deleteTopic(topic);
+  }
 }

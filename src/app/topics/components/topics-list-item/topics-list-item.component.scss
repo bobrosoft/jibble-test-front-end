@@ -9,7 +9,13 @@
   overflow: hidden; // need for ellipsis
   
   .post-title {
+    display: flex;
     font-size: 1.2rem;
+    
+    input {
+      flex: 1;
+      font-size: 1.2rem;
+    }
   }
 
   .album-title {

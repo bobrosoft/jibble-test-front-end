@@ -1,1 +1,1 @@
-<topics-list [topics]="topics$ | async"></topics-list>
+<topics-list [topics]="topics$ | async" (postTitleChange)="onPostTitleChange($event)" (deleteItem)="onDeleteItem($event)"></topics-list>

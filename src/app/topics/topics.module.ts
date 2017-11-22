@@ -4,10 +4,12 @@ import {TopicsService} from './services/topics/topics.service';
 import {TopicsPageComponent} from './components/topics-page/topics-page.component';
 import {TopicsListComponent} from './components/topics-list/topics-list.component';
 import {TopicsListItemComponent} from './components/topics-list-item/topics-list-item.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   declarations: [
     TopicsListComponent,

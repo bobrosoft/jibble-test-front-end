@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Topic} from '../../models/topic.model';
 
 @Component({
@@ -8,10 +8,21 @@ import {Topic} from '../../models/topic.model';
 })
 export class TopicsListComponent implements OnInit {
   @Input() topics: Topic[];
+  @Output() postTitleChange = new EventEmitter<{title: string; topic: Topic}>();
+  @Output() deleteItem = new EventEmitter<Topic>();
   
   constructor() { }
 
   ngOnInit() {
   }
 
+  onPostTitleChange(title: string, topic: Topic) {
+    // Proxy things up
+    this.postTitleChange.emit({title: title, topic: topic});
+  }
+
+  onDeleteItemClick(topic: Topic) {
+    // Proxy things up
+    this.deleteItem.emit(topic);
+  }
 }
